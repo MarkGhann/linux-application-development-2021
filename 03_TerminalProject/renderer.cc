@@ -155,7 +155,8 @@ int RenderFile(char **parts, char* file_name, int linec) {
                 break;
 	}
     }
-    
+
+    free(sizes);
     endwin();
     return 0;
 }
