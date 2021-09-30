@@ -36,7 +36,12 @@ int CopyFile(char **data, char *file_name, char separator) {
 
     int linec = 1;
     int idx = 0;
-    char ch = (char)fgetwc(f);
+    wchar_t wc = fgetwc(f);
+    if ((int)wc > 255) {
+        fprintf(stderr, "The file contains an unsupported symbol\n");
+        return -1;
+    }
+    char ch = (char)wc;
     while(ch != EOF) {
         if (ch == separator) {
 	    data[0][idx] = '\0';
@@ -44,7 +49,12 @@ int CopyFile(char **data, char *file_name, char separator) {
         } else {
             data[0][idx] = ch;
         }
-        ch = (char)fgetwc(f);
+        wc = fgetwc(f);
+        if ((int)wc > 255) {
+            fprintf(stderr, "The file contains an unsupported symbol\n");
+            return -1;
+        }
+        ch = (char)wc;
         idx++;
     }
     data[0][idx] = '\0';
