@@ -1,13 +1,9 @@
 #define ARGC 2
 #define SEPARATOR '\n'
 
-#include <curses.h>
+#include <ncurses.h>
 #include <sys/stat.h>
 #include <stdlib.h>
-#include <libgen.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
 #include <locale.h>
 #include <wchar.h>
 
@@ -22,7 +18,7 @@ int HandleArguments(int eargc, int argc, char *argv[]) {
         return -1;
     }
 
-    if (argv == nullptr) {
+    if (argv == NULL) {
         fprintf(stderr, " Bad argument vector\n");
         return -1;
     }
@@ -33,7 +29,7 @@ int HandleArguments(int eargc, int argc, char *argv[]) {
 int CopyFile(char **data, char *file_name, char separator) {
     FILE *f = fopen(file_name, "rt,ccs=UTF-8");
 
-    if(f == nullptr) {
+    if(f == NULL) {
         fprintf(stderr, "Cannot open the file\n");
         return -1;
     }
@@ -63,7 +59,7 @@ int LoadFile(char **data, char ***parts, char *file_name, char separator ) {
 
     stat(file_name, &info);
     *data = (char*)calloc(info.st_size + 1, sizeof(char));
-    if(*data == nullptr) {
+    if(*data == NULL) {
         fprintf(stderr, "Cannot allocate a storage for the file\n");
         return -1;
     }
@@ -71,7 +67,7 @@ int LoadFile(char **data, char ***parts, char *file_name, char separator ) {
     int linec = CopyFile(/*out*/ data, file_name, separator);
 
     *parts = (char**)calloc(linec + 1, sizeof(char*));
-    if(*parts == nullptr) {
+    if(*parts == NULL) {
         fprintf(stderr, "Cannot allocate memory for file lines\n");
         return -1;
     }
@@ -91,7 +87,7 @@ int RenderFile(char **parts, char* file_name, int linec) {
     noecho();
     cbreak();
     WINDOW *window = newwin(LINES-2*3, COLS-2*3, 3, 3);
-    if (window == nullptr) {
+    if (window == NULL) {
         fprintf(stderr, "Cannot render the window\n");
         return -1;
     }
