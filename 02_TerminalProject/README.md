@@ -1,4 +1,4 @@
-# Task 3: Terminal Project
+# Task 2: Terminal Project
 ## Run
 ```
 $ make 
