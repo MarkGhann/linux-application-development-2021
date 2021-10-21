@@ -1,4 +1,4 @@
-break range.c:59 if i % 5 == 0
+break range.c:59 if (i - start) / step + 1 > 27 && (i - start) / step + 1 < 36
     command 1
     printf "info: start: %i ", start
     printf " end: %i ", end
