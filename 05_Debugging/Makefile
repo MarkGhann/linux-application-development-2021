@@ -1,5 +1,5 @@
 CFLAGS=-Wall -Wshadow -Werror -Wextra -g
-OPTLEVEL=-O3
+OPTLEVEL=-O0
 COMPILER=cc
 
 all: range test
