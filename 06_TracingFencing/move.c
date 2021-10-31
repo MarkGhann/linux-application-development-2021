@@ -92,6 +92,7 @@ int move(char *argv[]) {
         if (errno != 0) {
             perror("./move (trying to delete the file)");
             ret = errno;
+            flag = 5;
         }
     }
 
