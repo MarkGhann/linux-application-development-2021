@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     }
 
     char conductor[BUF_SIZE + 1]; // +1 -- spare space 
-    flag = true;
+    int flag = 0;
 
     while(!feof(infile)) {
         errno = 0;
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
             fclose(infile);
             fclose(outfile);
             perror("move: can't get data from the file");
-            flag = false;
+            flag = 1;
             break;
         }
 
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
             fclose(infile);
             fclose(outfile);
             perror("move: can't put data into the file");
-            flag = false;
+            flag = 2;
             break;
         }
     }
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
     fclose(outfile);
     fclose(infile);
 
-    if (flag) {
+    if (flag == 0) {
         remove(infile_name);
     }
 
