@@ -4,6 +4,12 @@ COMPILER=cc
 SHARED=-shared
 DYN=-Wl,--no-as-needed -ldl
 
+FILE=./testfile.txt
+PROTECTED_FILE=./testfilePROTECT.txt
+TEST_NAME=./move_test.test
+HELPER_NAME=./move_helper.test
+HELPER_PROTECTED_NAME=./move_helperPROTECT.test
+
 all: protect.so move tests
 
 protect.so: protect.c
@@ -12,28 +18,41 @@ protect.so: protect.c
 move: move.c
 	$(COMPILER) $(CFLAGS) $(OPTLEVEL) $^ -o $@
 
-tests: test_1 test_2 test_3 test_4 test_5 test_protect_1 test_protect_2
+tests: test_1 test_2 test_protect_1 test_protect_2
 
 test_1: move
-	echo "test 1"
+	@echo "----- test 1 -----"
+	cp $(FILE) $(HELPER_NAME)
+	./move $(HELPER_NAME) $(TEST_NAME)
+	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
+	@if [ -f $(HELPER_NAME) ]; then exit 1; fi
+	cmp $(FILE) $(TEST_NAME)
+	@echo "----- test 1 PASSED -----"
+	@rm -rf *.test
 
 test_2: move
 	echo "test 2"
-
-test_3: move
-	echo "test 3"
-
-test_4: move
-	echo "test 4"
-
-test_5: move
-	echo "test 5"
+	@rm -rf *.test
 
 test_protect_1: move protect.so
-	echo "test protect 1"
+	@echo "----- test_protect 1 -----"
+	cp $(PROTECTED_FILE) $(HELPER_NAME)
+	LD_PRELOAD=./protect.so ./move $(HELPER_NAME) $(TEST_NAME)
+	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
+	@if [ -f $(HELPER_NAME) ]; then exit 1; fi
+	cmp $(PROTECTED_FILE) $(TEST_NAME)
+	@echo "----- test_protect 1 PASSED -----"
+	@rm -rf *.test
 
 test_protect_2: move protect.so
-	echo "test protect 2"
+	@echo "----- test_protect 2 -----"
+	cp $(PROTECTED_FILE) $(HELPER_NAME)
+	LD_PRELOAD=./protect.so ./move $(HELPER_NAME) $(TEST_NAME)
+	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
+	@if [ -f $(HELPER_NAME) ]; then exit 1; fi
+	cmp $(PROTECTED_FILE) $(TEST_NAME)
+	@echo "----- test_protect 2 PASSED -----"
+	@rm -rf *.test
 
 clean:
 	rm -r move protect.so *.test

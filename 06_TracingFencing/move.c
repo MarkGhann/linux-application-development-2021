@@ -18,11 +18,7 @@ int parseArgs(int argc /* , char *argv[] */) {
     return 0;
 }
 
-int main(int argc, char *argv[])
-{
-    if (parseArgs(argc /*, argv */) != 0) {
-        return -1;
-    }
+int move(char *argv[]) {
 
     int ret = 0;
 
@@ -97,6 +93,21 @@ int main(int argc, char *argv[])
             perror("./move");
             ret = errno;
         }
+    }
+
+    return ret;
+}
+int main(int argc, char *argv[])
+{
+    if (parseArgs(argc /*, argv */) != 0) {
+        return -1;
+    }
+    
+    errno = 0;
+    int ret = move(argv);
+    if ((ret == 0) && errno != 0) {
+        perror("./move");
+        ret = errno;
     }
 
     return ret;
