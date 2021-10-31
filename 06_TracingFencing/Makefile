@@ -50,7 +50,7 @@ test_2: move # (standard): ./move infile [outfile] + strace (in main: open)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@cmp $(FILE) $(HELPER_NAME)
 	@echo "----- standard test 2 (open) PASSED -----"
-	@rm -rf *.test
+	@rm -rf *.test o
 
 test_3: move # (standard): ./move infile [outfile] + strace (in main: close)
 	@echo "----- standard test 3 (close) -----"
@@ -72,7 +72,7 @@ test_3: move # (standard): ./move infile [outfile] + strace (in main: close)
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
 	@cmp $(FILE) $(HELPER_NAME)
 	@echo "----- standard test 3 (close) PASSED -----"
-	@rm -rf *.test
+	@rm -rf *.test o
 
 test_4: move # (standard): ./move infile [outfile] + strace (in main: "others")
 	@echo "----- standard test 4 -----"
@@ -94,7 +94,7 @@ test_4: move # (standard): ./move infile [outfile] + strace (in main: "others")
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
 	@cmp $(FILE) $(HELPER_NAME)
 	@echo "----- standard test 4 PASSED -----"
-	@rm -rf *.test
+	@rm -rf *.test o
 
 test_5: move # (standard): ./move infile [outfile (does not exist)]
 	@echo "----- standard test 5 -----"
@@ -124,7 +124,7 @@ test_5: move # (standard): ./move infile [outfile (does not exist)]
 	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
 	@cmp $(FILE) $(HELPER_NAME)
 	@echo "----- standard test 5 PASSED -----"
-	@rm -rf *.test
+	@rm -rf *.test o
 
 test_protect_1: move protect.so # (protect): LD_PRELOAD=./protect.so standard: ./move infile [outfile]
 	@echo "----- protected test 1 -----"
