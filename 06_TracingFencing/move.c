@@ -63,10 +63,6 @@ int main(int argc, char *argv[])
             flag = 1;
             break;
         }
-
-        int len = strlen(conductor);
-        conductor[len - 1] = '\n';
-        conductor[len] = '\0';
     
         errno = 0;
         fputs(conductor, outfile);
