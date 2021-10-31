@@ -110,5 +110,5 @@ int main(int argc, char *argv[])
         ret = errno;
     }
 
-    return ret;
+    return 0;
 }

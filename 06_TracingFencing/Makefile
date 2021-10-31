@@ -46,10 +46,10 @@ test_protect_1: move protect.so
 
 test_protect_2: move protect.so
 	@echo "----- test_protect 2 -----"
-	cp $(PROTECTED_FILE) $(HELPER_NAME)
-	LD_PRELOAD=./protect.so ./move $(HELPER_NAME) $(TEST_NAME)
+	cp $(PROTECTED_FILE) $(HELPER_PROTECTED_NAME)
+	LD_PRELOAD=./protect.so ./move $(HELPER_PROTECTED_NAME) $(TEST_NAME)
 	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
-	@if [ -f $(HELPER_NAME) ]; then exit 1; fi
+	@if [ ! -f $(HELPER_PROTECTED_NAME) ]; then exit 1; fi
 	cmp $(PROTECTED_FILE) $(TEST_NAME)
 	@echo "----- test_protect 2 PASSED -----"
 	@rm -rf *.test
