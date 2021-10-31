@@ -24,12 +24,15 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    int ret = 0;
+
     FILE *infile;
     const char* infile_name = argv[1];
     errno = 0;
     infile = fopen(infile_name, "r");
     if (errno != 0) {
-        perror("move: can't open the file");
+        perror("./move");
+        return errno;
     }
 
     FILE *outfile;
@@ -37,8 +40,15 @@ int main(int argc, char *argv[])
     errno = 0;
     outfile = fopen(outfile_name, "wb");
     if (errno != 0) {
-        fclose(outfile);
-        perror("move: can't open the file");
+        perror("./move");
+        ret = errno;
+        errno = 0;
+        fclose(infile);
+        if (errno != 0) {
+            perror("./move");
+            ret = errno;
+        }
+        return ret;
     }
 
     char conductor[BUF_SIZE + 1]; // +1 -- spare space 
@@ -48,9 +58,8 @@ int main(int argc, char *argv[])
         errno = 0;
         fgets(conductor, BUF_SIZE, infile);
         if (errno != 0) {
-            fclose(infile);
-            fclose(outfile);
-            perror("move: can't get data from the file");
+            perror("./move");
+            ret = errno;
             flag = 1;
             break;
         }
@@ -62,20 +71,37 @@ int main(int argc, char *argv[])
         errno = 0;
         fputs(conductor, outfile);
         if (errno != 0) {
-            fclose(infile);
-            fclose(outfile);
-            perror("move: can't put data into the file");
+            perror("./move");
+            ret = errno;
             flag = 2;
             break;
         }
     }
 
+    errno = 0;
     fclose(outfile);
-    fclose(infile);
-
-    if (flag == 0) {
-        remove(infile_name);
+    if (errno != 0) {
+        perror("./move");
+        ret = errno;
+        flag = 3;
     }
 
-    return 0;
+    errno = 0;
+    fclose(infile);
+    if (errno != 0) {
+        perror("./move");
+        ret = errno;
+        flag = 4;
+    }
+
+    if (flag == 0) {
+        errno = 0;
+        remove(infile_name);
+        if (errno != 0) {
+            perror("./move");
+            ret = errno;
+        }
+    }
+
+    return ret;
 }
