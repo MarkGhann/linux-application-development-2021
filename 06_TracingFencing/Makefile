@@ -26,7 +26,7 @@ test_1: move # (standard): ./move infile [outfile]
 	./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
 	@if [ -f $(HELPER_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(TEST_NAME)
+	@cmp $(FILE) $(TEST_NAME)
 	@echo "----- standard test 1 PASSED -----"
 	@rm -rf *.test
 
@@ -36,19 +36,19 @@ test_2: move # (standard): ./move infile [outfile] + strace (in main: open)
 	strace -foo -e fault=openat:error=ETXTBSY:when=3 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=openat:error=ETXTBSY:when=4 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=openat:error=EFAULT:when=3 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=openat:error=EFAULT:when=4 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	@echo "----- standard test 2 (open) PASSED -----"
 	@rm -rf *.test
 
@@ -58,19 +58,19 @@ test_3: move # (standard): ./move infile [outfile] + strace (in main: close)
 	strace -foo -e fault=openat:error=ETXTBSY:when=3 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=openat:error=ETXTBSY:when=4 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=openat:error=EFAULT:when=3 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=openat:error=EFAULT:when=4 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	@echo "----- standard test 3 (close) PASSED -----"
 	@rm -rf *.test
 
@@ -80,19 +80,19 @@ test_4: move # (standard): ./move infile [outfile] + strace (in main: "others")
 	strace -foo -e fault=openat:error=ETXTBSY:when=3 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=openat:error=ETXTBSY:when=4 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=openat:error=EFAULT:when=3 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=openat:error=EFAULT:when=4 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	@echo "----- standard test 4 PASSED -----"
 	@rm -rf *.test
 
@@ -102,27 +102,27 @@ test_5: move # (standard): ./move infile [outfile (does not exist)]
 	strace -foo -e fault=fstat:error=EACCES:when=3 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=fstat:error=ELOOP:when=4 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=read:error=EINVAL:when=2 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=read:error=ETXTBSY:when=3 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=write:error=ENOMEM:when=1 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	strace -foo -e fault=unlink:error=ENOMEM:when=1 ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(HELPER_NAME) ]; then exit 1; fi
 	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
-	cmp $(FILE) $(HELPER_NAME)
+	@cmp $(FILE) $(HELPER_NAME)
 	@echo "----- standard test 5 PASSED -----"
 	@rm -rf *.test
 
@@ -132,7 +132,7 @@ test_protect_1: move protect.so # (protect): LD_PRELOAD=./protect.so standard: .
 	LD_PRELOAD=./protect.so ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
 	@if [ -f $(HELPER_NAME) ]; then exit 1; fi
-	cmp $(PROTECTED_FILE) $(TEST_NAME)
+	@cmp $(PROTECTED_FILE) $(TEST_NAME)
 	@echo "----- protected test 1 PASSED -----"
 	@rm -rf *.test
 
@@ -142,8 +142,8 @@ test_protect_2: move protect.so # (protect): LD_PRELOAD=./protect.so standard: .
 	LD_PRELOAD=./protect.so ./move $(HELPER_PROTECTED_NAME) $(TEST_NAME)
 	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
 	@if [ ! -f $(HELPER_PROTECTED_NAME) ]; then exit 1; fi
-	cmp $(PROTECTED_FILE) $(TEST_NAME)
-	cmp $(PROTECTED_FILE) $(HELPER_PROTECTED_NAME)
+	@cmp $(PROTECTED_FILE) $(TEST_NAME)
+	@cmp $(PROTECTED_FILE) $(HELPER_PROTECTED_NAME)
 	@echo "----- protected test 2 PASSED -----"
 	@rm -rf *.test
 
