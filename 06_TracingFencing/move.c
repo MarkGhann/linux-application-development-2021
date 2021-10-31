@@ -95,6 +95,15 @@ int move(char *argv[]) {
         }
     }
 
+    if (flag != 0) {
+        errno = 0;
+        remove(outfile_name);
+        if (errno != 0) {
+            perror("./move (trying to delete the file)");
+            ret = errno;
+        }
+    }
+
     return ret;
 }
 int main(int argc, char *argv[])
