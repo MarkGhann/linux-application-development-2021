@@ -27,7 +27,7 @@ int move(char *argv[]) {
     errno = 0;
     infile = fopen(infile_name, "r");
     if (errno != 0) {
-        perror("./move");
+        perror("./move (trying to open the file)");
         return errno;
     }
 
@@ -36,12 +36,12 @@ int move(char *argv[]) {
     errno = 0;
     outfile = fopen(outfile_name, "wb");
     if (errno != 0) {
-        perror("./move");
+        perror("./move (trying to open the file)");
         ret = errno;
         errno = 0;
         fclose(infile);
         if (errno != 0) {
-            perror("./move");
+            perror("./move (trying to close the file)");
             ret = errno;
         }
         return ret;
@@ -54,7 +54,7 @@ int move(char *argv[]) {
         errno = 0;
         fgets(conductor, BUF_SIZE, infile);
         if (errno != 0) {
-            perror("./move");
+            perror("./move (trying to get data from the file)");
             ret = errno;
             flag = 1;
             break;
@@ -63,7 +63,7 @@ int move(char *argv[]) {
         errno = 0;
         fputs(conductor, outfile);
         if (errno != 0) {
-            perror("./move");
+            perror("./move (trying to put data into the file)");
             ret = errno;
             flag = 2;
             break;
@@ -73,7 +73,7 @@ int move(char *argv[]) {
     errno = 0;
     fclose(outfile);
     if (errno != 0) {
-        perror("./move");
+        perror("./move (trying to close the file)");
         ret = errno;
         flag = 3;
     }
@@ -81,7 +81,7 @@ int move(char *argv[]) {
     errno = 0;
     fclose(infile);
     if (errno != 0) {
-        perror("./move");
+        perror("./move (trying to close the file)");
         ret = errno;
         flag = 4;
     }
@@ -90,7 +90,7 @@ int move(char *argv[]) {
         errno = 0;
         remove(infile_name);
         if (errno != 0) {
-            perror("./move");
+            perror("./move (trying to delete the file)");
             ret = errno;
         }
     }

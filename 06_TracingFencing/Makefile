@@ -20,39 +20,45 @@ move: move.c
 
 tests: test_1 test_2 test_protect_1 test_protect_2
 
-test_1: move
-	@echo "----- test 1 -----"
+test_1: move # (standard): ./move infile [outfile]
+	@echo "----- standard test 1 -----"
 	cp $(FILE) $(HELPER_NAME)
 	./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
 	@if [ -f $(HELPER_NAME) ]; then exit 1; fi
 	cmp $(FILE) $(TEST_NAME)
-	@echo "----- test 1 PASSED -----"
+	@echo "----- standard test 1 PASSED -----"
 	@rm -rf *.test
 
-test_2: move
-	echo "test 2"
+test_2: move # (standard): ./move infile [outfile] + strace
+	@echo "----- standard test 2 -----"
+	cp $(FILE) $(HELPER_NAME)
+	./move $(HELPER_NAME) $(TEST_NAME)
+	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
+	@if [ -f $(HELPER_NAME) ]; then exit 1; fi
+	cmp $(FILE) $(TEST_NAME)
+	@echo "----- standard test 2 PASSED -----"
 	@rm -rf *.test
 
-test_protect_1: move protect.so
-	@echo "----- test_protect 1 -----"
+test_protect_1: move protect.so # (protect): LD_PRELOAD=./protect.so standard: ./move infile [outfile]
+	@echo "----- protected test 1 -----"
 	cp $(PROTECTED_FILE) $(HELPER_NAME)
 	LD_PRELOAD=./protect.so ./move $(HELPER_NAME) $(TEST_NAME)
 	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
 	@if [ -f $(HELPER_NAME) ]; then exit 1; fi
 	cmp $(PROTECTED_FILE) $(TEST_NAME)
-	@echo "----- test_protect 1 PASSED -----"
+	@echo "----- protected test 1 PASSED -----"
 	@rm -rf *.test
 
-test_protect_2: move protect.so
-	@echo "----- test_protect 2 -----"
+test_protect_2: move protect.so # (protect): LD_PRELOAD=./protect.so standard: ./move PROTECT_infile [outfile]
+	@echo "----- protected test 2 -----"
 	cp $(PROTECTED_FILE) $(HELPER_PROTECTED_NAME)
 	LD_PRELOAD=./protect.so ./move $(HELPER_PROTECTED_NAME) $(TEST_NAME)
 	@if [ ! -f $(TEST_NAME) ]; then exit 1; fi
 	@if [ ! -f $(HELPER_PROTECTED_NAME) ]; then exit 1; fi
 	cmp $(PROTECTED_FILE) $(TEST_NAME)
-	@echo "----- test_protect 2 PASSED -----"
+	@echo "----- protected test 2 PASSED -----"
 	@rm -rf *.test
 
 clean:
-	rm -r move protect.so *.test
+	rm -r move protect.so
