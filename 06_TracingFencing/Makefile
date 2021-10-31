@@ -2,7 +2,7 @@ CFLAGS=-Wall -Wshadow -Werror -Wextra -g
 OPTLEVEL=-O0
 COMPILER=cc
 SHARED=-shared
-DYN=-ldl -Wl
+DYN=-Wl,--no-as-needed -ldl
 
 all: protect.so move tests
 
@@ -18,4 +18,4 @@ test_1:
 	echo "test 1"
 
 clean:
-	rm -r move protect.so
+	rm -r move protect.so *.test
