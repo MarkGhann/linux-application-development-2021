@@ -3,8 +3,18 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "rhash.h"
+
+#define PROMPT NULL
+
+#ifdef READLINE_ENABLED
+#include <readline/readline.h>
+#define ENDOFLINE NULL
+#else
+#define ENDOFLINE -1
+#endif
 
 void usage()
 {
@@ -136,10 +146,19 @@ int main() {
     char *str = NULL;
     size_t count = 0;
     printf(">>> ");
+#ifdef READLINE_ENABLED
+    str = readline(PROMPT);
+    char *cntn = str;
+#else
     int cntn = getline(&str, &count, stdin);
-    for(;cntn != -1;) {
+#endif
+
+    for(;cntn != ENDOFLINE;) {
         char *ins = NULL;
         char *data= NULL;
+#ifdef READLINE_ENABLED
+        count = strlen(str);
+#endif
         strToIns(str, count, &ins /* out */, &data /* out */);
         
         if (data == NULL || ins == NULL) {
@@ -157,7 +176,14 @@ int main() {
         }
         
         printf(">>> ");
+#ifdef READLINE_ENABLED
+        str = readline(PROMPT);
+        cntn = str;
+#else
         cntn = getline(&str, &count, stdin);
+#endif
     }
+
+    printf("\n");
     return 0;
 }
