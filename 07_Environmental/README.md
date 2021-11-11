@@ -15,7 +15,12 @@ make run_tests
 make rhasher
 ```
 
-## Clean (Delete Build Directory)
+## Clean (Delete All Related Files from  Build Directory)
 ```
-make clean
+make build_clean
+```
+
+## Clean (Delete All Files from  Build Directory)
+```
+make total_clean
 ```
