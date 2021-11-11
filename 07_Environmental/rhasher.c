@@ -16,7 +16,7 @@
 
 void usage()
 {
-    fprintf(stderr, "Usage:\n\t <ALGORITHM NAME> <STRING (WITH \") OR FILE>\n\t Supported algorithms:\n\t\t1. MD5\n\t\t2. SHA1\n\t\t3. TTH\n");
+    fprintf(stderr, "Usage:\n\t <ALGORITHM NAME> <STRING (WITH \") OR FILE>\n\t Supported algorithms:\n\t\t1. MD5\n\t\t2. SHA1\n\t\t3. TTH\n\t\t4. SHA256");
 }
 
 void strToIns(char *str, size_t count, char **ins, char **data) {
@@ -74,6 +74,8 @@ int detectType(const char *ins) {
         return 1;
     } else if(strcmp(copy, "TTH") == 0) {
         return 2;
+    } else if(strcmp(copy, "SHA256") == 0) {
+        return 3;
     }
 
     free(copy);
@@ -107,6 +109,9 @@ int receiveHash(const char *ins, char *data, char *res) {
         } break;
         case 2: { // TTH
             algorithm = RHASH_TTH;
+        } break;
+        case 3: { // SHA256
+            algorithm = RHASH_SHA256;
         } break;
         default: {
             fprintf(stderr, "Error: Unsupported hash method\n");
@@ -144,7 +149,9 @@ int main() {
     char *str = NULL;
     size_t count = 0;
 #ifdef READLINE_ENABLED
-    printf("--- ( ! readline mode enabled) \n");
+    printf("-- readline mode enabled --\n");
+#else
+    printf("-- getline mode enabled --\n");
 #endif
     printf(">>> ");
 #ifdef READLINE_ENABLED
