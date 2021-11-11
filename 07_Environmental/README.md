@@ -1,6 +1,12 @@
 # Task 7: Environmental
 
-## Build and Run test
+## Cmake
+```
+cd <build dir>
+cmake <source dir> [-DREADLINE_ENABLED=true/false]
+```
+
+## Build and Run tests
 ```
 make
 ```
