@@ -19,8 +19,3 @@ make rhasher
 ```
 make build_clean
 ```
-
-## Clean (Delete All Files from  Build Directory)
-```
-make total_clean
-```

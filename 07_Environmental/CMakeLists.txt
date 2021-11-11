@@ -423,8 +423,12 @@ add_custom_target( build_clean
         COMMAND echo "build directory cleaned"
 )
 
+if (${CMAKE_CURRENT_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
+    message(WARNING "Cmake and Binary directories match!")
+else()
 add_custom_target( total_clean
         COMMAND echo "removing all files from build directory"
-        COMMAND rm ${CMAKE_CURRENT_BINARY_DIR}/*
+        COMMAND rm -r ${CMAKE_CURRENT_BINARY_DIR}/*
         COMMAND echo "build directory cleaned"
 )
+endif()
