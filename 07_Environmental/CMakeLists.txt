@@ -36,16 +36,32 @@ add_custom_target( run_tests
 
         COMMAND echo "test 1 MD5 File"
         COMMAND echo -n "MD5 ${CMAKE_SOURCE_DIR}/test-sources/test1" | ${CMAKE_CURRENT_BINARY_DIR}/rhasher > ${CMAKE_SOURCE_DIR}/testing/helper.txt
-        COMMAND sed 's/result//g' ${CMAKE_SOURCE_DIR}/testing/helper.txt | sed 's/://g' | sed 's/>>>//g' | sed 's/ //g' > ${CMAKE_SOURCE_DIR}/testing/tmp_test_custom.txt
+        COMMAND sed 's/result//g' ${CMAKE_SOURCE_DIR}/testing/helper.txt | sed 's/://g' | sed 's/>>>//g' | sed 's/ //g' > ${CMAKE_SOURCE_DIR}/testing/helper2.txt
+        COMMAND sed '1!d' ${CMAKE_SOURCE_DIR}/testing/helper2.txt > ${CMAKE_SOURCE_DIR}/testing/tmp_test_custom.txt
         COMMAND md5sum ${CMAKE_SOURCE_DIR}/test-sources/test1 > ${CMAKE_SOURCE_DIR}/testing/helper.txt
-        COMMAND sed 's/ [^|]*//' ${CMAKE_SOURCE_DIR}/testing/helper.txt 1> ${CMAKE_SOURCE_DIR}/testing/tmp_test_system.txt
+        COMMAND sed 's/ [^|]*//' ${CMAKE_SOURCE_DIR}/testing/helper.txt 1> ${CMAKE_SOURCE_DIR}/testing/helper2.txt
+        COMMAND sed '1!d' ${CMAKE_SOURCE_DIR}/testing/helper2.txt > ${CMAKE_SOURCE_DIR}/testing/tmp_test_system.txt
         COMMAND cmp ${CMAKE_SOURCE_DIR}/testing/tmp_test_custom.txt ${CMAKE_SOURCE_DIR}/testing/tmp_test_system.txt
         COMMAND echo "test 1 PASSED"
 
         COMMAND echo "test 2 MD5 File"
+        COMMAND echo -n "MD5 ${CMAKE_SOURCE_DIR}/test-sources/test2" | ${CMAKE_CURRENT_BINARY_DIR}/rhasher > ${CMAKE_SOURCE_DIR}/testing/helper.txt
+        COMMAND sed 's/result//g' ${CMAKE_SOURCE_DIR}/testing/helper.txt | sed 's/://g' | sed 's/>>>//g' | sed 's/ //g' > ${CMAKE_SOURCE_DIR}/testing/helper2.txt
+        COMMAND sed '1!d' ${CMAKE_SOURCE_DIR}/testing/helper2.txt > ${CMAKE_SOURCE_DIR}/testing/tmp_test_custom.txt
+        COMMAND md5sum ${CMAKE_SOURCE_DIR}/test-sources/test2 > ${CMAKE_SOURCE_DIR}/testing/helper.txt
+        COMMAND sed 's/ [^|]*//' ${CMAKE_SOURCE_DIR}/testing/helper.txt 1> ${CMAKE_SOURCE_DIR}/testing/helper2.txt
+        COMMAND sed '1!d' ${CMAKE_SOURCE_DIR}/testing/helper2.txt > ${CMAKE_SOURCE_DIR}/testing/tmp_test_system.txt
+        COMMAND cmp ${CMAKE_SOURCE_DIR}/testing/tmp_test_custom.txt ${CMAKE_SOURCE_DIR}/testing/tmp_test_system.txt
         COMMAND echo "test 2 PASSED"
 
         COMMAND echo "test 3 MD5 File"
+        COMMAND echo -n "MD5 ${CMAKE_SOURCE_DIR}/test-sources/test3" | ${CMAKE_CURRENT_BINARY_DIR}/rhasher > ${CMAKE_SOURCE_DIR}/testing/helper.txt
+        COMMAND sed 's/result//g' ${CMAKE_SOURCE_DIR}/testing/helper.txt | sed 's/://g' | sed 's/>>>//g' | sed 's/ //g' > ${CMAKE_SOURCE_DIR}/testing/helper2.txt
+        COMMAND sed '1!d' ${CMAKE_SOURCE_DIR}/testing/helper2.txt > ${CMAKE_SOURCE_DIR}/testing/tmp_test_custom.txt
+        COMMAND md5sum ${CMAKE_SOURCE_DIR}/test-sources/test3 > ${CMAKE_SOURCE_DIR}/testing/helper.txt
+        COMMAND sed 's/ [^|]*//' ${CMAKE_SOURCE_DIR}/testing/helper.txt 1> ${CMAKE_SOURCE_DIR}/testing/helper2.txt
+        COMMAND sed '1!d' ${CMAKE_SOURCE_DIR}/testing/helper2.txt > ${CMAKE_SOURCE_DIR}/testing/tmp_test_system.txt
+        COMMAND cmp ${CMAKE_SOURCE_DIR}/testing/tmp_test_custom.txt ${CMAKE_SOURCE_DIR}/testing/tmp_test_system.txt
         COMMAND echo "test 3 PASSED"
 
         COMMAND echo "test 4 MD5 String"
