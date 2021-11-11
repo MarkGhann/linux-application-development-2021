@@ -8,10 +8,14 @@ cmake <source dir> [-DREADLINE_ENABLED=true/false]
 
 ## Build and Run tests
 ```
-make
+make run_tests
+```
+## Build rhasher
+```
+make rhasher
 ```
 
-## Clean
+## Clean (Delete Build Directory)
 ```
 make clean
 ```

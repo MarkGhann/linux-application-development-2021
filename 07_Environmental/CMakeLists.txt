@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 project(07_Environmental)
 
-option(READLINE_ENABLED false)
+option(READLINE_ENABLED "Set readline mode" false)
 
 set(LIBS "")
 set(COMPILE_VARS "")
@@ -26,3 +26,31 @@ endif()
 add_executable(rhasher rhasher.c)
 target_link_libraries(rhasher ${LIBS})
 target_compile_definitions(rhasher PRIVATE ${COMPILE_VARS})
+
+
+set(ALGORITHMS
+    md5
+    sha1
+    tth
+)
+
+add_custom_target( run_tests
+        COMMAND mkdir -p ${CMAKE_SOURCE_DIR}/testing
+        COMMAND touch ${CMAKE_SOURCE_DIR}/testing/tmp_test_custom.txt
+        COMMAND touch ${CMAKE_SOURCE_DIR}/testing/tmp_test_system.txt
+
+        COMMAND echo "test 1"
+        COMMAND echo "MD5 ${CMAKE_SOURCE_DIR}/test-sources/test1" | ${CMAKE_CURRENT_BINARY_DIR}/rhasher 1> ${CMAKE_SOURCE_DIR}/testing/tmp_test_custom.txt
+        COMMAND md5sum ${CMAKE_SOURCE_DIR}/test-sources/test1 1> ${CMAKE_SOURCE_DIR}/testing/tmp_test_system.txt
+        COMMAND cmp ${CMAKE_SOURCE_DIR}/testing/tmp_test_custom.txt ${CMAKE_SOURCE_DIR}/testing/tmp_test_system.txt
+        COMMAND echo "test 1 PASSED"
+
+        COMMAND rm -r ${CMAKE_SOURCE_DIR}/testing
+        DEPENDS rhasher
+)
+
+add_custom_target( clean
+        COMMAND echo "removing build directory"
+        COMMAND rm -r ${CMAKE_CURRENT_BINARY_DIR}
+        COMMAND echo "build directory removed"
+)

@@ -120,7 +120,7 @@ int receiveHash(const char *ins, char *data, char *res) {
             r = rhash_file(algorithm, data, buffer);
         } break;
         case 1: { // string
-            r = rhash_msg(algorithm, data, strlen(data) - 1, buffer);
+            r = rhash_msg(algorithm, data, strlen(data), buffer);
         } break;
         default: {
             fprintf(stderr, "Error: Unsupported data\n");
