@@ -135,6 +135,7 @@ int main() {
 
     char *str = NULL;
     size_t count = 0;
+    printf(">>> ");
     int cntn = getline(&str, &count, stdin);
     for(;cntn != -1;) {
         char *ins = NULL;
@@ -154,7 +155,8 @@ int main() {
                 printf("result: %s\n", res);
             }
         }
-
+        
+        printf(">>> ");
         cntn = getline(&str, &count, stdin);
     }
     return 0;
