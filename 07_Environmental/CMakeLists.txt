@@ -415,20 +415,10 @@ endif()
 
 add_custom_target( build_clean
         COMMAND echo "removing related files from build directory"
-        COMMAND rm ${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt
-        COMMAND rm -r ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles
-        COMMAND rm ${CMAKE_CURRENT_BINARY_DIR}/Makefile
-        COMMAND rm ${CMAKE_CURRENT_BINARY_DIR}/cmake_install.cmake
-        COMMAND rm ${CMAKE_CURRENT_BINARY_DIR}/rhasher
+        COMMAND rm -f ${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt
+        COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles
+        COMMAND rm -f ${CMAKE_CURRENT_BINARY_DIR}/Makefile
+        COMMAND rm -f ${CMAKE_CURRENT_BINARY_DIR}/cmake_install.cmake
+        COMMAND rm -f ${CMAKE_CURRENT_BINARY_DIR}/rhasher
         COMMAND echo "build directory cleaned"
 )
-
-if (${CMAKE_CURRENT_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
-    message(WARNING "Cmake and Binary directories match!")
-else()
-add_custom_target( total_clean
-        COMMAND echo "removing all files from build directory"
-        COMMAND rm -r ${CMAKE_CURRENT_BINARY_DIR}/*
-        COMMAND echo "build directory cleaned"
-)
-endif()
