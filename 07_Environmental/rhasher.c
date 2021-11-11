@@ -145,6 +145,9 @@ int main() {
 
     char *str = NULL;
     size_t count = 0;
+#ifdef READLINE_ENABLED
+    printf("--- ( ! readline mode enabled) \n");
+#endif
     printf(">>> ");
 #ifdef READLINE_ENABLED
     str = readline(PROMPT);
@@ -159,12 +162,12 @@ int main() {
 #ifdef READLINE_ENABLED
         count = strlen(str);
 #endif
+
         strToIns(str, count, &ins /* out */, &data /* out */);
         
         if (data == NULL || ins == NULL) {
             usage();
         } else {
-
             char res[4096];
             int fail = receiveHash(ins, data, res /* out */);
 
@@ -176,6 +179,7 @@ int main() {
         }
         
         printf(">>> ");
+
 #ifdef READLINE_ENABLED
         str = readline(PROMPT);
         cntn = str;
