@@ -1,10 +1,9 @@
 #define _GNU_SOURCE
 
 #include <ctype.h>
+#include <rhash.h>
 #include <string.h>
 #include <stdlib.h>
-
-#include "rhash.h"
 
 #define PROMPT NULL
 
