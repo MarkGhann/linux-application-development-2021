@@ -3,7 +3,7 @@
 ## Cmake
 ```
 cd <build dir>
-cmake <source dir> [-DREADLINE_ENABLED=true/false]
+cmake <source dir>
 ```
 
 ## Build and Run tests
