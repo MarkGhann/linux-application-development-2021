@@ -19,18 +19,16 @@ int parseArgs(int argc)
 
     return 0;
 }
-int convertToDigit(char ch) {
-    return ch - '0';
-}
 
-int reduce(const char *sub, size_t pmsize, char *new_sub) {
+int reduce(const char *sub, char *new_sub) {
     size_t size = strlen(sub);
     size_t i = 0;
     size_t j = 0;
     while(i < size) {
         if (sub[i] == '\\') {
             i++;
-            if (i == size) { 
+            if (i == size) {
+                fprintf(stderr,"Invalid substitution: not enough characters (ends wuth '\\') \n");
                 return -1;
             } else if (sub[i] == '\\') {
                 new_sub[j] = sub[i];
@@ -43,6 +41,10 @@ int reduce(const char *sub, size_t pmsize, char *new_sub) {
     }
 
     return 0;
+}
+
+int convertToDigit(char ch) {
+    return ch - '0';
 }
 
 int replaceSymbolsOnce(const char *s, const char *sub, regmatch_t pm[], char *result) {
@@ -96,7 +98,7 @@ int main(int argc, char *argv[]) {
     strcpy(result, argv[3]);
 
     if (!regexec(&re, argv[3], PM, pm, 0)) {
-        if (reduce(argv[2], sizeof(pm)/sizeof(pm[0]), sub /* out */) != 0) {
+        if (reduce(argv[2], sub /* out */) != 0) {
             fprintf(stderr, "Incorrect sub\n");
             return 3;
         }
