@@ -11,7 +11,7 @@ void usage()
 
 int parseArgs(int argc)
 {
-    int ARGS_NUM = 3;
+    int ARGS_NUM = 4;
 
     if (argc != ARGS_NUM) {
         return -1;
@@ -32,13 +32,17 @@ int main(int argc, char *argv[]) {
     regex_t re;
     regmatch_t pm[PM];
 
-    regcomp(&re, argv[1], 0);
+    if (regcomp(&re, argv[1], 0)) {
+        return 2;
+    }
 
     for(; getline(&line, &number, stdin); number=0, line=NULL) {
         if (!regexec(&re, line, PM, pm, 0)) {
             for(int i = 0; i < PM; i++) {
                 printf("%d: %d/%d\n", i, pm[i].rm_so, pm[i].rm_eo);
             }
+        } else {
+            // pass
         }
         free(line);
     }
