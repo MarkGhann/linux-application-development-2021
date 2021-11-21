@@ -112,24 +112,32 @@ int main(int argc, char *argv[]) {
     
     char result[4096];
     char sub[4096];
+    char err[4096];
     size_t number = 0;
     size_t PM = strlen(argv[3]);
 
     regex_t re;
     regmatch_t pm[PM];
 
-    if (regcomp(&re, argv[1], REG_EXTENDED)) {
+    int r = regcomp(&re, argv[1], REG_EXTENDED);
+    size_t n = regerror(r, &re, err, 4096);
+
+    if (strcmp(err, "Success") != 0) {
         fprintf(stderr,"Cannot compile the regexp\n");
         return 2;
     }
     
     strcpy(result, argv[3]);
 
-    if (!regexec(&re, argv[3], PM, pm, 0)) {
+    r = regexec(&re, argv[3], PM, pm, 0);
+    n = regerror(r, &re, err, 4096);
+
+    if (strcmp(err, "Success") == 0) {
         if (reduce(argv[2], sub /* out */) != 0) {
             fprintf(stderr, "Incorrect sub\n");
             return 3;
         }
+
         if (replaceSymbolsOnce(argv[3], sub, pm, result /* out */) != 0) {
             fprintf(stderr, "Cannot replace.\n");
             return 4;
