@@ -6,6 +6,14 @@ add_executable(esub esub.c)
 
 add_custom_target( run_tests
         COMMAND mkdir -p ${CMAKE_SOURCE_DIR}/testing
+        COMMAND touch ${CMAKE_SOURCE_DIR}/testing/tmp_test_custom.txt
+        COMMAND touch ${CMAKE_SOURCE_DIR}/testing/helper.txt
+
+        COMMAND echo "Positive tests"
+        COMMAND ${CMAKE_SOURCE_DIR}/pos_tests.sh ${CMAKE_SOURCE_DIR}
+        COMMAND echo "tests PASSED"
+
+        COMMAND rm -rf ${CMAKE_SOURCE_DIR}/testing
         DEPENDS esub
 )
 
