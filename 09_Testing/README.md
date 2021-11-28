@@ -11,7 +11,7 @@ cmake <source dir> -DCODE_COVERAGE=true
 make tests
 ```  
 
-## Show coverage
+## Covarage
 ```
 make ccov-testing
 ```  
