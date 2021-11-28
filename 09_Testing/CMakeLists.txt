@@ -26,6 +26,8 @@ add_test(
 )
 
 # coverage
+
+# the option below is moved from the code-coverage.cmake file
 option(
   CODE_COVERAGE
   "Builds targets with code coverage instrumentation. (Requires GCC or Clang)"
