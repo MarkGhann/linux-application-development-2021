@@ -14,13 +14,13 @@ find_package(GTest REQUIRED)
 add_executable(testing ${CMAKE_CURRENT_SOURCE_DIR}/tests.cpp)
 target_link_libraries(testing PRIVATE ${GTEST_LIBRARY} ${GTEST_MAIN_LIBRARY} pthread libbuffer)
 
-add_custom_target( exam_tests
+add_custom_target( tests
     COMMAND ${CMAKE_CURRENT_BINARY_DIR}/testing
     DEPENDS testing
 )
 
 add_test(
-    NAME tests
+    NAME gtests
     COMMAND ${CMAKE_CURRENT_BINARY_DIR}/testing
     DEPENDS testing
 )

@@ -3,12 +3,12 @@
 ## Cmake
 ```
 cd <build dir>
-cmake <source dir>
+cmake <source dir> -DCODE_COVERAGE=true
 ```
 
 ## Build and Run tests
 ```
-make exam_tests
+make tests
 ```  
 
 ## Show coverage
