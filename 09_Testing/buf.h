@@ -63,7 +63,7 @@ struct buf {
 #define buf_push(v, e) \
     do { \
         if (buf_capacity((v)) == buf_size((v))) { \
-            (v) = (float *)buf_grow1(v, sizeof(*(v)), \
+            (v) = (decltype(v))buf_grow1(v, sizeof(*(v)), \
                             !buf_capacity((v)) ? \
                               BUF_INIT_CAPACITY : \
                               buf_capacity((v))); \
@@ -75,10 +75,10 @@ struct buf {
     ((v)[--buf_ptr(v)->size])
 
 #define buf_grow(v, n) \
-    ((v) = buf_grow1((v), sizeof(*(v)), n))
+    ((v) = (decltype(v))buf_grow1((v), sizeof(*(v)), n))
 
 #define buf_trunc(v, n) \
-    ((v) = buf_grow1((v), sizeof(*(v)), n - buf_capacity(v)))
+    ((v) = (decltype(v))buf_grow1((v), sizeof(*(v)), n - buf_capacity(v)))
 
 #define buf_clear(v) \
     ((v) ? (buf_ptr((v))->size = 0) : 0)

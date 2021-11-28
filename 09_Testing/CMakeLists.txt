@@ -26,12 +26,16 @@ add_test(
 )
 
 # coverage
-option(COVARAGE_ENABLED "Enable coverage mode" false)
+option(
+  CODE_COVERAGE
+  "Builds targets with code coverage instrumentation. (Requires GCC or Clang)"
+  OFF)
 
-set(CMAKE_BUILD_TYPE Debug)
-include(${CMAKE_CURRENT_SOURCE_DIR}/code-coverage.cmake)
-
-target_code_coverage(testing)
+if(CODE_COVERAGE)
+    set(CMAKE_BUILD_TYPE Debug)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/code-coverage.cmake)
+    target_code_coverage(testing)
+endif()
 
 add_custom_target( build_clean
         COMMAND echo "removing related files from build directory"
