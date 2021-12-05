@@ -11,7 +11,7 @@ message("-- `make update_100` -- to update the translation")
 add_custom_target(
     translate
     COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/po/ru/LC_MESSAGES
-    COMMAND msgfmt -o ${CMAKE_CURRENT_BINARY_DIR}/po/ru/LC_MESSAGES/100.m ${CMAKE_SOURCE_DIR}/po/ru.po
+    COMMAND msgfmt -o ${CMAKE_CURRENT_BINARY_DIR}/po/ru/LC_MESSAGES/100.mo ${CMAKE_SOURCE_DIR}/po/ru.po
     DEPENDS 100
 )
 
