@@ -31,6 +31,12 @@ add_custom_target(
     DEPENDS translate
 )
 
+add_custom_target(
+    en_100
+    COMMAND LANGUAGE=en_EN ${CMAKE_CURRENT_BINARY_DIR}/100
+    DEPENDS 100
+)
+
 add_custom_target( build_clean
         COMMAND echo "removing related files from build directory"
         COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt
