@@ -13,21 +13,26 @@ int r = 0; /**< comand line parameter '-r' / `--romain` turn on the Roman Mode. 
 const char *argp_program_version = "0.0"; /**< The program's version */
 const char *argp_program_bug_address = "gmarkmg@yandex.ru"; /**< address for bug reporting*/
 static char doc[] = "The program tries to guess the number that you have guessed."; /**< The program about */
-static struct argp_option opts[] = { {"romain", 'r', 0, 0, "Use the Romain mode instead of Arabic one."},
+static struct argp_option opts[] = { {"romain", 'r', 0, 0, "Use the Roman mode instead of Arabic one."},
                                      {0},
                                 };
 
-static error_t parseArgRomain(int k, /* unused */ char *par, /* unused */ struct argp_state *rec) {
+/**
+* The function parses comand line arguments.
+*
+* @k -- an argument's key. Type: int.
+*
+* @Return -- result of parsing a param. Type: error_t.
+**/
+static error_t parseArg(int k, /* unused */ char *par, /* unused */ struct argp_state *rec) {
     if (k == 'r') {
-        printf("%s", "asdasdasd");
         r = 1;
-        return 0;
     }
 
-    return -1;
+    return 0;
 }
 
-static struct argp argp = {opts, parseArgRomain, 0, doc};
+static struct argp argp = {opts, parseArg, 0, doc};
 
 /**
 * The function converts a number from the Roman system to Arabic. 
@@ -36,7 +41,7 @@ static struct argp argp = {opts, parseArgRomain, 0, doc};
 *
 * @Return -- Arabic number. Type: int.
 **/
-int fromRomain(const char *number) {
+int fromRoman(const char *number) {
     if (strcmp(number, "N")) {
         return 0;
     }
@@ -348,7 +353,7 @@ int fromRomain(const char *number) {
 * @i -- the number that will be translated from the Arabic system to the Roman one. Type: int.
 * @number -- the buffer supposed to contain the string representation of the result. Type: char * (out).
 **/
-void toRomain(int i, char *number /* out */) {
+void toRoman(int i, char *number /* out */) {
     static char* n[101] = {
                             "N",
                             "I",
@@ -471,7 +476,7 @@ int takePoint(int *bot, int *top, int basis, int r) {
         printf(_("The number greater than %d (yes/no) ?\n"), basis);
     } else {
         char nn[5];
-        toRomain(basis, nn);
+        toRoman(basis, nn);
         printf(_("The number greater than %s (yes/no) ?\n"), nn);
     }
 
@@ -508,7 +513,7 @@ int main(int argc, char *argv[]) {
         printf(_("Guessed number is %d !\n"), bot);
     } else {
         char nn[5];
-        toRomain(bot, nn);
+        toRoman(bot, nn);
         printf(_("Guessed number is %s !\n"), nn);
     }
 
