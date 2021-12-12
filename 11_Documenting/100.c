@@ -3,8 +3,15 @@
 #include <libintl.h>
 #include <locale.h>
 
-#define _(string) gettext(string)
+#define _(string) gettext(string) /**< gettext macros */
 
+/**
+* The function converts a number from the Roman system to Arabic. 
+* 
+* @number -- the string representation of a number in the Roman system. Type: const char *.
+*
+* @Return -- Arabic number. Type: int.
+**/
 int fromRomain(const char *number) {
     if (strcmp(number, "N")) {
         return 0;
@@ -311,6 +318,12 @@ int fromRomain(const char *number) {
     }
 }
 
+/**
+* The function converts the number from the Arabic system to the Roman one.
+*
+* @i -- the number that will be translated from the Arabic system to the Roman one. Type: int.
+* @number -- the buffer supposed to contain the string representation of the result. Type: char * (out).
+**/
 void toRomain(int i, char *number /* out */) {
     static char* n[101] = {
                             "N",
@@ -455,10 +468,7 @@ int takePoint(int *bot, int *top, int basis, int r) {
 }
 
 int main(int argc, char *argv[]) {
-    int r = 0; // checkArgs(argc, argv);
-    // if (r == -1) {
-
-    // }
+    int r = 0; /**< comand line parameter '--r' turn on the Roman Mode. */
 
     setlocale(LC_ALL, "");
     bindtextdomain("100","po");
