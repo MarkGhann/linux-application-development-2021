@@ -46,6 +46,11 @@ make en_100_r
 make en_100_help
 ```  
 
+## Show man
+```
+make man
+```  
+
 ## Update the trenslation
 ```
 make update_100

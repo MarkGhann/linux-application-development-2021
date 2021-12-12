@@ -61,12 +61,20 @@ add_custom_target(
     DEPENDS 100
 )
 
+add_custom_target(
+    man
+    COMMAND help2man --no-info --output=${CMAKE_BINARY_DIR}/100.l --name=${CMAKE_BINARY_DIR}/100 ${CMAKE_BINARY_DIR}/100
+    COMMAND man ${CMAKE_BINARY_DIR}/100.l
+    DEPENDS 100
+)
+
 add_custom_target( build_clean
         COMMAND echo "removing related files from build directory"
         COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt
         COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles
         COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/po
         COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/100
+        COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/100.l
         COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/Makefile
         COMMAND rm -rf ${CMAKE_CURRENT_BINARY_DIR}/cmake_install.cmake
         COMMAND echo "build directory cleaned"

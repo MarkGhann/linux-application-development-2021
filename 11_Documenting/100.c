@@ -10,13 +10,6 @@
 
 int r = 0; /**< comand line parameter '-r' / `--romain` turn on the Roman Mode. */
 
-const char *argp_program_version = "0.0"; /**< The program's version */
-const char *argp_program_bug_address = "gmarkmg@yandex.ru"; /**< address for bug reporting*/
-static char doc[] = "The program tries to guess the number that you have guessed."; /**< The program about */
-static struct argp_option opts[] = { {"romain", 'r', 0, 0, "Use the Roman mode instead of Arabic one."},
-                                     {0},
-                                };
-
 /**
 * The function parses comand line arguments.
 *
@@ -32,7 +25,8 @@ static error_t parseArg(int k, /* unused */ char *par, /* unused */ struct argp_
     return 0;
 }
 
-static struct argp argp = {opts, parseArg, 0, doc};
+const char *argp_program_version = "0.0"; /**< The program's version */
+const char *argp_program_bug_address = "gmarkmg@yandex.ru"; /**< address for bug reporting*/
 
 /**
 * The function converts a number from the Roman system to Arabic. 
@@ -497,6 +491,9 @@ int takePoint(int *bot, int *top, int basis, int r) {
 }
 
 int main(int argc, char *argv[]) {
+    const char *doc = _("The program tries to guess the number that you have guessed."); /**< The program about */
+    const struct argp_option opts[] = {{"roman", 'r', 0, 0, _("Use the Roman mode instead of Arabic one.")}, {0},};
+    const struct argp argp = {opts, parseArg, 0, doc};
     argp_parse(&argp, argc, argv, 0, 0, 0);
 
     setlocale(LC_ALL, "");
