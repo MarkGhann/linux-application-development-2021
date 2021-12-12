@@ -1,6 +1,7 @@
 /// @mainpage
 # Documentation
 
+```
 Usage: 100 [OPTION...]
 The program tries to guess the number that you have guessed.
 
@@ -10,5 +11,6 @@ The program tries to guess the number that you have guessed.
   -V, --version              Print program version
 
 Report bugs to gmarkmg@yandex.ru.
+```
 
 See '100.c'

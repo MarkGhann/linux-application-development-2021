@@ -1,3 +1,8 @@
+/** @file 100.c
+* This file contains the source code of the program that guesses
+* the number from 1 to 100. 
+**/
+
 #include <stdio.h>
 #include <string.h>
 #include <libintl.h>
@@ -5,7 +10,7 @@
 
 #include <argp.h>
 
-#define _(string) gettext(string) /**< gettext macros */
+#define _(string) gettext(string) /**< gettext macros using to echange english strings*/
 
 
 int r = 0; /**< comand line parameter '-r' / `--romain` turn on the Roman Mode. */
@@ -13,9 +18,9 @@ int r = 0; /**< comand line parameter '-r' / `--romain` turn on the Roman Mode. 
 /**
 * The function parses comand line arguments.
 *
-* @k -- an argument's key. Type: int.
+* `k` -- an argument's key. Type: int.
 *
-* @Return -- result of parsing a param. Type: error_t.
+* @return -- result of parsing a param. Type: error_t.
 **/
 static error_t parseArg(int k, /* unused */ char *par, /* unused */ struct argp_state *rec) {
     if (k == 'r') {
@@ -31,9 +36,9 @@ const char *argp_program_bug_address = "gmarkmg@yandex.ru"; /**< address for bug
 /**
 * The function converts a number from the Roman system to Arabic. 
 * 
-* @number -- the string representation of a number in the Roman system. Type: const char *.
+* `number` -- the string representation of a number in the Roman system. Type: const char *.
 *
-* @Return -- Arabic number. Type: int.
+* @return -- Arabic number. Type: int.
 **/
 int fromRoman(const char *number) {
     if (strcmp(number, "N")) {
@@ -344,8 +349,9 @@ int fromRoman(const char *number) {
 /**
 * The function converts the number from the Arabic system to the Roman one.
 *
-* @i -- the number that will be translated from the Arabic system to the Roman one. Type: int.
-* @number -- the buffer supposed to contain the string representation of the result. Type: char * (out).
+* `i` is the number that will be translated from the Arabic system to the Roman one. Type: int.
+*
+* `number` is the buffer supposed to contain the string representation of the result. Type: char * (out).
 **/
 void toRoman(int i, char *number /* out */) {
     static char* n[101] = {
