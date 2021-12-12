@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-05 17:19+0300\n"
+"POT-Creation-Date: 2021-12-12 22:43+0300\n"
 "PO-Revision-Date: 2021-12-05 03:37+0300\n"
 "Last-Translator:  <gmarkmg@yandex.ru>\n"
 "Language-Team: Russian\n"
@@ -18,25 +18,45 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: /home/kely/linux/linux-application-development-2021/10_I18n/100.c:20
+#: /home/kely/linux/linux-application-development-2021/11_Documenting/100.c:470
 #, c-format
 msgid "The number greater than %d (yes/no) ?\n"
 msgstr "Это число больше %d (да/нет) ?\n"
 
-#: /home/kely/linux/linux-application-development-2021/10_I18n/100.c:25
+#: /home/kely/linux/linux-application-development-2021/11_Documenting/100.c:474
+#, c-format
+msgid "The number greater than %s (yes/no) ?\n"
+msgstr "Это число больше %s (да/нет) ?\n"
+
+#: /home/kely/linux/linux-application-development-2021/11_Documenting/100.c:481
 msgid "yes"
 msgstr "да"
 
-#: /home/kely/linux/linux-application-development-2021/10_I18n/100.c:27
+#: /home/kely/linux/linux-application-development-2021/11_Documenting/100.c:483
 msgid "no"
 msgstr "нет"
 
-#: /home/kely/linux/linux-application-development-2021/10_I18n/100.c:30
+#: /home/kely/linux/linux-application-development-2021/11_Documenting/100.c:486
 #, c-format
 msgid "That's not what's being needed ! Try again: yes/no.\n"
 msgstr "Ожидался другой ответ ! Попытайтесь снова: да/нет. ?\n"
 
-#: /home/kely/linux/linux-application-development-2021/10_I18n/100.c:48
+#: /home/kely/linux/linux-application-development-2021/11_Documenting/100.c:494
+#, c-format
+msgid "The program tries to guess the number that you have guessed."
+msgstr "Эта программа угадает число, которое Вы загадали."
+
+#: /home/kely/linux/linux-application-development-2021/11_Documenting/100.c:495
+#, c-format
+msgid "Use the Roman mode instead of Arabic one."
+msgstr "Использовать римские цифры вместо арабских."
+
+#: /home/kely/linux/linux-application-development-2021/11_Documenting/100.c:510
 #, c-format
 msgid "Guessed number is %d !\n"
 msgstr "Загаданное число -- %d !\n"
+
+#: /home/kely/linux/linux-application-development-2021/11_Documenting/100.c:514
+#, c-format
+msgid "Guessed number is %s !\n"
+msgstr "Загаданное число -- %s !\n"
