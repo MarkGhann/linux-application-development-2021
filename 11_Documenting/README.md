@@ -56,6 +56,11 @@ make man
 make update_100
 ```  
 
+## Generate documentation (see `doxygen_dir`)
+```
+make documentation
+```
+
 ## Clean (Delete All Related Files from  Build Directory)
 ```
 make build_clean
