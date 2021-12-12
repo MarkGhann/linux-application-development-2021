@@ -28,6 +28,12 @@ add_custom_target(
 )
 
 add_custom_target(
+    ru_100_help
+    COMMAND LANGUAGE=ru_RU ${CMAKE_CURRENT_BINARY_DIR}/100 --help
+    DEPENDS 100 translate
+)
+
+add_custom_target(
     update_100
     COMMAND xgettext --keyword=_ --add-comments ${CMAKE_SOURCE_DIR}/100.c -o ${CMAKE_CURRENT_BINARY_DIR}/100.pot
     COMMAND msgmerge -U ${CMAKE_SOURCE_DIR}/po/ru.po ${CMAKE_CURRENT_BINARY_DIR}/100.pot
@@ -45,7 +51,13 @@ add_custom_target(
 
 add_custom_target(
     en_100_r
-    COMMAND LANGUAGE=en_EN ${CMAKE_CURRENT_BINARY_DIR}/100 -- roman
+    COMMAND LANGUAGE=en_EN ${CMAKE_CURRENT_BINARY_DIR}/100 --roman
+    DEPENDS 100
+)
+
+add_custom_target(
+    en_100_help
+    COMMAND LANGUAGE=en_EN ${CMAKE_CURRENT_BINARY_DIR}/100 --help
     DEPENDS 100
 )
 
