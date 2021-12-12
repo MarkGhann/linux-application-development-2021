@@ -11,7 +11,7 @@ cmake ..
 make
 ```  
 
-## Make the trenslation
+## Make the translation
 ```
 make translate
 ```  
@@ -51,7 +51,7 @@ make en_100_help
 make man
 ```  
 
-## Update the trenslation
+## Update the translation
 ```
 make update_100
 ```  
