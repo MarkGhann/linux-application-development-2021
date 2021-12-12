@@ -3,7 +3,18 @@
 #include <libintl.h>
 #include <locale.h>
 
+#include <argp.h>
+
 #define _(string) gettext(string) /**< gettext macros */
+
+
+const char *argp_program_version = "0.0"; /**< The program's version */
+const char *argp_program_bug_address = "gmarkmg@yandex.ru"; /**< address for bug reporting*/
+static char doc[] = "The program trys to guess your number in mind."; /**< The program about */
+static struct argp_option opts[] = { {"romain", 'r', 0, 0, "Use the Romain mode instead of Arabic one."},
+                                     {0},
+                                };
+static struct argp argp = {opts, 0, 0, doc};
 
 /**
 * The function converts a number from the Roman system to Arabic. 
@@ -468,6 +479,7 @@ int takePoint(int *bot, int *top, int basis, int r) {
 }
 
 int main(int argc, char *argv[]) {
+    argp_parse(&argp, argc, argv, 0, 0, 0);
     int r = 0; /**< comand line parameter '--r' turn on the Roman Mode. */
 
     setlocale(LC_ALL, "");
