@@ -4,6 +4,7 @@ project(10_I18n)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 set(CMAKE_INSTALL_PREFIX /)
+
 message("-- `make translate` -- to make the russian translation")
 message("-- `make ru_100` -- to run program in russian")
 message("-- `make update_100` -- to update the translation")
