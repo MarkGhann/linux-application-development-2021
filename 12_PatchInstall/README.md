@@ -41,7 +41,7 @@ make man_goes
 make  DESTDIR=<dst dir> install
 ```  
 
-## default instalation (in '/', be carefully)
+## default instalation (in '/usr', be careful)
 ```
 make install
 ```  
