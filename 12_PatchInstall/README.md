@@ -43,7 +43,7 @@ make man_goes
 
 ## installation
 ```
-make  DESTDIR=<dst dir> install
+make DESTDIR=<dst dir> install
 ```  
 
 ## default instalation (in '/usr', be careful)
@@ -51,7 +51,7 @@ make  DESTDIR=<dst dir> install
 make install
 ```  
 
-## Clean (Delete All Related Files from  Build Directory)
+## Clean (Delete All Related Files from Build Directory)
 ```
 make build_clean
 ```
