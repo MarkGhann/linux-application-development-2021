@@ -21,6 +21,11 @@ make translate
 make ru_100
 ```  
 
+## Run the program in english
+```
+make en_100
+```  
+
 ## Update the trenslation
 ```
 make update_100
