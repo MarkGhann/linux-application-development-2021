@@ -50,11 +50,7 @@ add_custom_target( man_goes
 )
 
 install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/share/locale/ru/LC_MESSAGES/100.mo DESTINATION usr/share/locale/ru/LC_MESSAGES/
-)
-
-install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/share/man/man1/100.l DESTINATION usr/share/man/man1/
+    DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/share DESTINATION usr/
 )
 
 install(
