@@ -1,4 +1,4 @@
-# Task 10: I18n
+# Task 12: PatchInstall
 
 ## Cmake
 ```
@@ -41,9 +41,9 @@ make man_goes
 make  DESTDIR=<dst dir> install
 ```  
 
-## default instalation
+## default instalation (in '/', be carefully)
 ```
-make  DESTDIR=/usr install
+make install
 ```  
 
 ## Clean (Delete All Related Files from  Build Directory)
